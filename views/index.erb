@@ -1,0 +1,22 @@
+<h1>Train Lines</h1>
+
+<p>Here are the available train lines!</p>
+
+<form action="/line" method="post">
+  <label for="color">Assign a color to your line:</label>
+  <input id="color" name="color" type="text">
+
+  <button type="submit">Add line</button>
+</form>
+
+<% if @lines.any?() %>
+<p>Click on a line to see its stations:</p>
+
+<ul>
+  <% @lines.each do |line_parameter| %>
+  <li><a href="/stations/<%= line_parameter.id() %>"><%= line_parameter.color() %></a></li>
+  <% end %>
+</ul>
+<% else %>
+<p>There are no lines yet!</p>
+<% end %>

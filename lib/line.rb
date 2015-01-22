@@ -17,6 +17,16 @@ class Line
     lines
   end
 
+  define_singleton_method(:find_line) do |id|
+    found_line = nil
+    Line.all().each() do |line_parameter|
+      if line_parameter.id().==(id)
+        found_line = line_parameter
+      end
+    end
+    found_line
+  end
+
   define_method(:save) do
     result = DB.exec("INSERT INTO line (color) VALUES ('#{@color}') RETURNING id;")
     @id = result.first().fetch("id").to_i()
@@ -26,5 +36,6 @@ class Line
     self.color().==(another_line.color()).&(self.id().==(another_line.id()))
   end
 
+  # define_method(:station_id)
 
 end #end class
